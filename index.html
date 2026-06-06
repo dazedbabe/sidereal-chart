@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sidereal Technical Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-dim: #7A5E28;
+    --ink: #0E0C08;
+    --parchment: #F4ECD8;
+    --parchment-dark: #E8D9BC;
+    --rust: #8B3A2A;
+    --teal: #2A6B6E;
+    --purple: #4A3060;
+    --text: #1C160C;
+    --muted: #5A4E38;
+  }
+
+  body {
+    background: var(--ink);
+    font-family: 'EB Garamond', serif;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--parchment);
+    border: 1px solid var(--gold-dim);
+    box-shadow: 0 0 60px rgba(201,168,76,0.15), 0 0 0 4px var(--ink), 0 0 0 6px var(--gold-dim);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page::before, .page::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-color: var(--gold-dim);
+    border-style: solid;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .page::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+  .page::after { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+  .header {
+    text-align: center;
+    padding: 2.5rem 2rem 1.5rem;
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .header h1 span { color: var(--gold); }
+
+  .header-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 2rem;
+    opacity: 0.4;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--gold-dim); }
+  .divider-sym { color: var(--gold); font-size: 0.9rem; }
+
+  .form-section {
+    padding: 0 2rem 1.5rem;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--gold-dim); opacity: 0.4; }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  input, select {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 8px 12px;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--text);
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  input:focus, select:focus {
+    border-color: var(--gold);
+  }
+
+  input::placeholder { color: var(--muted); opacity: 0.6; }
+
+  select option { background: var(--parchment); }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: all 0.2s;
+  }
+
+  .btn:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); color: var(--gold); }
+  .btn:active { transform: scale(0.99); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .output-section {
+    padding: 0 2rem 2rem;
+  }
+
+  .output-box {
+    background: rgba(42,107,110,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text);
+    white-space: pre-wrap;
+    font-family: 'EB Garamond', serif;
+    min-height: 80px;
+  }
+
+  .loading {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; }
+  .dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes pulse { 0%,80%,100%{opacity:0.3;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+
+  .loading-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .error {
+    background: rgba(139,58,42,0.08);
+    border: 1px solid rgba(139,58,42,0.3);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: var(--rust);
+    margin-top: 8px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid rgba(42,107,110,0.3);
+    padding: 3px 10px;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-note {
+    text-align: center;
+    padding: 1rem 2rem 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    opacity: 0.6;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+
+  @media (max-width: 500px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: 1; }
+    .page { margin: 0; }
+    body { padding: 1rem 0.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-eyebrow">Ancient Methods · Modern Precision</div>
+    <h1>Sidereal <span>Technical</span> Analyst</h1>
+    <div class="header-sub">Lahiri Ayanamsa · Whole Sign Houses · Swiss Ephemeris · No Barnum Effect</div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-sym">✦</div><div class="divider-line"></div></div>
+
+  <div class="form-section">
+    <div class="section-label">Birth data</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="bdate">Date of birth</label>
+        <input type="date" id="bdate" />
+      </div>
+      <div class="form-group">
+        <label for="btime">Time of birth</label>
+        <input type="time" id="btime" />
+      </div>
+      <div class="form-group full">
+        <label for="bcity">City of birth</label>
+        <input type="text" id="bcity" placeholder="e.g. Douglas, Georgia, USA" />
+      </div>
+      <div class="form-group">
+        <label for="blat">Latitude (optional)</label>
+        <input type="text" id="blat" placeholder="e.g. 31.5059" />
+      </div>
+      <div class="form-group">
+        <label for="blng">Longitude (optional)</label>
+        <input type="text" id="blng" placeholder="e.g. -82.8488" />
+      </div>
+    </div>
+
+    <div class="section-label">Analysis type</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="atype">Focus</label>
+        <select id="atype">
+          <option value="full">Full natal chart</option>
+          <option value="transits">Current transits</option>
+          <option value="dasha">Dasha timing</option>
+          <option value="yogas">Yogas only</option>
+          <option value="career">Career & public output</option>
+          <option value="challenges">Challenges & obstructions</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="depth">Depth</label>
+        <select id="depth">
+          <option value="standard">Standard</option>
+          <option value="technical">Deep technical</option>
+          <option value="summary">Summary only</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" id="calc-btn" onclick="runAnalysis()">✦ Calculate Chart ✦</button>
+    <div id="err"></div>
+  </div>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-sym">✦</div><div class="divider-line"></div></div>
+
+  <div class="output-section" id="output-section" style="display:none;">
+    <div class="section-label">Chart reading</div>
+    <div class="badge" id="output-badge"></div>
+    <div class="output-box" id="output-box"></div>
+  </div>
+
+  <div class="footer-note">
+    Calculations reference Swiss Ephemeris · Lahiri (Chitra Paksha) Ayanamsa · Whole Sign Houses · Parashari Jyotish
+  </div>
+
+</div>
+
+<script>
+const today = new Date().toISOString().split('T')[0];
+
+const analysisMap = {
+  full: 'Generate a full natal chart analysis including all sections: Raw Astronomical Data table, Planetary Dignity & Avasthas, Structural Chart Analysis, Technical Yogas, Vimshottari Dasha sequence, Transit Impact using today\'s date, and Technical Inference.',
+  transits: 'Focus on Transit Impact only. Show all current transiting planets using today\'s date against natal house positions. List major aspects using Parashari drishiti rules (Saturn 3rd/7th/10th, Jupiter 5th/7th/9th, Mars 4th/7th/8th).',
+  dasha: 'Focus on Vimshottari Dasha. Calculate full dasha chronology from birth, identify current Mahadasha and Antardasha, note sensitivity if birth time uncertain. Provide technical inference on timing.',
+  yogas: 'Focus on Technical Yogas. Identify and mathematically verify all yogas. Check for Graha Yuddha (planets within 1 degree). State Shad Bala winner for any planetary wars.',
+  career: 'Focus on 10th house, its lord, and Mahadasha/Antardasha lords. Analyze career and public output grounded in house lordships and current dasha period.',
+  challenges: 'Identify primary technical obstructions: debilitations, combustions, dusthana placements, and difficult yoga combinations. Be specific and non-Barnum.'
+};
+
+const depthMap = {
+  standard: 'Standard depth analysis.',
+  technical: 'Maximum technical depth. Include Shad Bala references, avastha states, and Nakshatra pada analysis for each planet.',
+  summary: 'Concise summary table format. Minimize prose. Lead with data tables.'
+};
+
+async function runAnalysis() {
+  const date = document.getElementById('bdate').value;
+  const time = document.getElementById('btime').value;
+  const city = document.getElementById('bcity').value.trim();
+  const lat = document.getElementById('blat').value.trim();
+  const lng = document.getElementById('blng').value.trim();
+  const atype = document.getElementById('atype').value;
+  const depth = document.getElementById('depth').value;
+  const btn = document.getElementById('calc-btn');
+  const err = document.getElementById('err');
+  const outSection = document.getElementById('output-section');
+  const outBox = document.getElementById('output-box');
+  const outBadge = document.getElementById('output-badge');
+
+  err.innerHTML = '';
+
+  if (!date || !time || !city) {
+    err.innerHTML = '<div class="error">Date, time, and city are required. Coordinates improve Ascendant precision.</div>';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Consulting the ephemeris...';
+  outSection.style.display = 'block';
+  outBox.innerHTML = '<div class="loading"><div class="dot"></div><div class="dot"></div><div class="dot"></div><span class="loading-label" style="margin-left:8px">Calculating sidereal positions...</span></div>';
+  outBadge.textContent = '';
+
+  const coordNote = lat && lng ? `Coordinates: ${lat}N, ${lng}W` : '';
+
+  const systemPrompt = `You are a specialized Sidereal Astrology Analyst performing high-precision technical calculations based on Vedic (Jyotish) principles. You prioritize astronomical data over personality interpretation. You never use Barnum Effect language.
+
+CORE RULES:
+1. Ayanamsa: Lahiri (Chitra Paksha) exclusively.
+2. House System: Whole Sign Houses exclusively.
+3. Always show mathematical conversion: Tropical Position minus Ayanamsa equals Sidereal Position.
+4. Identify planetary dignity before analysis.
+5. Never ask "does this resonate?" Every statement traceable to specific degree, Nakshatra, or Yoga.
+6. Reference Swiss Ephemeris and Jagannatha Hora algorithms.
+7. For transits use today's date: ${today}
+8. Flag if birth time uncertainty over 4 minutes affects Antardasha dates.
+9. If challenged on calculation, show raw math.
+10. Never cluster planets by sign theme without individual degree verification.
+11. Graha Yuddha: planets within 1 degree (excluding Sun/Moon/Rahu/Ketu) — identify war and Shad Bala winner.
+12. Missing birth time or location: state Ascendant cannot be calculated.
+
+TONE: Clinical, technical, objective. Researcher vocabulary. Flag Sandhi and Gandanta positions.`;
+
+  const userMsg = `Birth Data:
+Date: ${date}
+Time: ${time} local
+Location: ${city}
+${coordNote}
+Today for transits: ${today}
+
+${analysisMap[atype]}
+${depthMap[depth]}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.map(b => b.text || '').join('') || 'No response received.';
+
+    outBadge.textContent = `${city} · ${date} · Lahiri · Whole Sign`;
+    outBox.textContent = text;
+
+  } catch(e) {
+    outBox.innerHTML = `<div class="error">Error: ${e.message}</div>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = '✦ Calculate Chart ✦';
+}
+</script>
+</body>
+</html>

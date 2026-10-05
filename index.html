@@ -58,18 +58,6 @@
   }
   .btn-primary:hover { background: var(--accent-light); }
 
-  .btn-secondary {
-    display: inline-block;
-    background: transparent;
-    color: var(--accent);
-    padding: 11px 22px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: 1.5px solid var(--accent);
-  }
-
   h2 { font-size: 1.45rem; text-align: center; margin-bottom: 10px; }
   p.section-sub { text-align: center; color: var(--muted); max-width: 580px; margin: 0 auto 36px; }
 
@@ -85,10 +73,16 @@
   .step h3 { font-size: 1.02rem; margin-bottom: 4px; }
   .step p { color: var(--muted); font-size: 0.94rem; margin: 0; }
 
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
-  .card h3 { font-size: 1rem; margin-bottom: 6px; }
-  .card p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+  .pages { max-width: 640px; margin: 0 auto; }
+  .page-item { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .page-item:last-child { border-bottom: none; }
+  .page-item .pg {
+    flex: 0 0 auto; color: var(--accent-warm); font-weight: 700; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 0.05em; padding-top: 4px; width: 52px;
+    font-family: -apple-system, sans-serif;
+  }
+  .page-item h3 { font-size: 1.02rem; margin-bottom: 4px; }
+  .page-item p { color: var(--muted); font-size: 0.94rem; margin: 0; }
 
   .trust-box {
     max-width: 620px; margin: 36px auto 0; text-align: center;
@@ -154,12 +148,12 @@
 
 <section class="hero">
   <div class="container">
-    <p class="tagline">Free beta — limited spots</p>
+    <p class="tagline">Free beta, limited spots</p>
     <h1>A reading that shows its math.</h1>
     <p class="sub">
       Most astrology apps sell you vague daily content. This is different: a precise,
-      astronomically-grounded <strong>sidereal chart report</strong> — every claim traceable
-      to a real degree, nakshatra, or dasha period — turned into decisions, experiments,
+      astronomically grounded <strong>sidereal chart report</strong>, with every claim traceable
+      to a real degree, nakshatra, or dasha period, turned into decisions, experiments,
       and timing you can actually use.
     </p>
     <a href="#request-form" class="btn-primary">Get My Free Report</a>
@@ -175,21 +169,21 @@
         <div class="num">1</div>
         <div>
           <h3>You submit your birth details</h3>
-          <p>Date, time, and place. Two minutes. If your birth time is approximate, that's fine — I'll flag exactly what it does and doesn't affect.</p>
+          <p>Date, time, and place. Two minutes. If your birth time is approximate, that's fine; I'll flag exactly what it does and doesn't affect.</p>
         </div>
       </div>
       <div class="step">
         <div class="num">2</div>
         <div>
           <h3>I calculate and verify your chart</h3>
-          <p>Sidereal (Lahiri) zodiac, Whole Sign houses, real ephemeris math — every position cross-checked against a second independent engine before anything is written.</p>
+          <p>Sidereal (Lahiri) zodiac, Whole Sign houses, real ephemeris math. Every position is cross-checked against a second independent engine before anything is written.</p>
         </div>
       </div>
       <div class="step">
         <div class="num">3</div>
         <div>
           <h3>You get a report built around your decisions</h3>
-          <p>Your patterns, your current dasha period, your timing windows — translated into a 6–12 month plan with concrete experiments. Delivered in 7–10 days.</p>
+          <p>Your patterns, your current dasha period, your timing windows, translated into a 6 to 12 month plan with concrete experiments. Delivered in 7 to 10 days.</p>
         </div>
       </div>
     </div>
@@ -199,35 +193,46 @@
 <section>
   <div class="container">
     <h2>What's in the report</h2>
-    <p class="section-sub">One document, built specifically for your chart.</p>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Chart Foundations</h3>
-        <p>Your rising sign, houses, and key planets — plain language first, technical detail underneath.</p>
+    <p class="section-sub">Five pages. One document, built specifically for your chart.</p>
+    <div class="pages">
+      <div class="page-item">
+        <div class="pg">Page 1</div>
+        <div>
+          <h3>Your Sky, Verified</h3>
+          <p>Your raw planetary positions, degrees, nakshatras, and houses, cross-checked before a single word of interpretation is written. No spin, just your actual sky.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>High-Signal Signatures</h3>
-        <p>The placements that matter most in your chart, each paired with a concrete 7–30 day experiment.</p>
+      <div class="page-item">
+        <div class="pg">Page 2</div>
+        <div>
+          <h3>Where This Comes From</h3>
+          <p>The lineage behind the method, from Babylonian omen catalogs through Greek theory to the Indian calculation tradition, so you know exactly what kind of tool you're holding.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Life Seasons Roadmap</h3>
-        <p>Your current Vimshottari dasha and upcoming transits, mapped to dated timing windows.</p>
+      <div class="page-item">
+        <div class="pg">Page 3</div>
+        <div>
+          <h3>The Patterns</h3>
+          <p>Three to five named patterns in your chart, each with what the tradition says it means, and how that actually ties into your life. Only patterns that connect to a real decision make the cut.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Calibration Notes</h3>
-        <p>Birth time uncertain? You'll see exactly what that changes — and what holds regardless.</p>
+      <div class="page-item">
+        <div class="pg">Page 4</div>
+        <div>
+          <h3>What To Do With This</h3>
+          <p>Dated timing windows with one recommended sequencing decision per window, an honest section on what this cannot tell you, and a note on how sensitive the reading is to your birth time.</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Decision Journal Setup</h3>
-        <p>Prompts for tracking how your chart's patterns actually show up in real decisions.</p>
-      </div>
-      <div class="card">
-        <h3>6–12 Month Plan</h3>
-        <p>Goals and action steps sequenced to your current planetary period — not generic advice.</p>
+      <div class="page-item">
+        <div class="pg">Page 5</div>
+        <div>
+          <h3>The Record</h3>
+          <p>The method, a plain-language glossary, and an invitation to tell me what landed and what didn't. Your feedback shapes the next version.</p>
+        </div>
       </div>
     </div>
     <div class="trust-box">
-      <p><strong>Beta-tested and verified:</strong> every report position is cross-checked against an independent
+      <p><strong>Beta tested and verified:</strong> every report position is cross-checked against an independent
       calculation engine. Beta readers so far include a practicing astrologer with 20+ years of experience,
       who gave the method a strongly positive review.</p>
     </div>
@@ -243,7 +248,7 @@
 
       <div class="form-note">
         <strong>Beta phase:</strong> each report is calculated, cross-checked, and personally reviewed
-        before delivery — expect it within <strong>7–10 days</strong>. This is a coaching document,
+        before delivery. Expect it within <strong>7 to 10 days</strong>. This is a coaching document,
         not an automated horoscope.
       </div>
 
@@ -282,7 +287,7 @@
       </div>
 
       <div class="field">
-        <label for="question">One decision or question you're facing right now <span class="hint">(optional — it makes your report sharper)</span></label>
+        <label for="question">One decision or question you're facing right now <span class="hint">(optional, and it makes your report sharper)</span></label>
         <textarea id="question" name="current_question" rows="3" placeholder="e.g. career change, a move, a big decision, a question about timing..."></textarea>
       </div>
 
@@ -292,7 +297,7 @@
 
       <button type="submit" class="btn-primary" style="width:100%;">Submit Request</button>
     </form>
-    <p class="form-success" id="form-success">Thank you — your request has been received.</p>
+    <p class="form-success" id="form-success">Thank you, your request has been received.</p>
   </div>
 </section>
 
@@ -326,7 +331,7 @@
 
     <div class="faq-item">
       <h3>Is this tropical astrology?</h3>
-      <p>No — sidereal (Vedic), with the Lahiri ayanamsa and Whole Sign houses, calculated from real ephemeris data.</p>
+      <p>No. This is sidereal (Vedic), with the Lahiri ayanamsa and Whole Sign houses, calculated from real ephemeris data.</p>
     </div>
     <div class="faq-item">
       <h3>Is this AI generated?</h3>
@@ -334,7 +339,7 @@
     </div>
     <div class="faq-item">
       <h3>Will you tell me my future?</h3>
-      <p>No predictions. This is about timing, patterns, and decisions — you test how your chart's tendencies actually show up in your life.</p>
+      <p>No predictions. This is about timing, patterns, and decisions, so you can test how your chart's tendencies actually show up in your life.</p>
     </div>
     <div class="faq-item">
       <h3>What if my birth time is off?</h3>

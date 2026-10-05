@@ -103,7 +103,8 @@
     color: var(--muted);
     max-width: 600px;
     margin: 0 auto 40px;
-  }
+ 
+ }
 
   ul.checklist {
     list-style: none;
@@ -177,7 +178,8 @@
   input[type="text"],
   input[type="email"],
   input[type="date"],
-  input[type="time"] {
+  input[type="time"],
+  textarea {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid var(--border);
@@ -367,7 +369,7 @@
     <h2>Request Your Report</h2>
     <p class="section-sub">Beta phase — limited spots, manually reviewed reports.</p>
 
-    <form id="lifeplan-form" action="https://formspree.io/f/meebewvg" method="POST">
+    <form id="lifeplan-form" action="https://formspree.io/f/moejqzjr" method="POST">
 
       <div class="form-note">
         <strong>Beta phase:</strong> reports are generated using a verified sidereal chart
@@ -403,6 +405,16 @@
       <div class="field">
         <label for="birthplace">Birth City &amp; Country <span class="req">*</span></label>
         <input type="text" id="birthplace" name="birthplace" required placeholder="e.g. Austin, USA">
+      </div>
+
+      <div class="field">
+        <label for="reddit">Reddit Username <span style="font-weight:400;color:#5c5c60;">(if you found this through Reddit)</span></label>
+        <input type="text" id="reddit" name="reddit_username" placeholder="e.g. u/yourusername">
+      </div>
+
+      <div class="field">
+        <label for="question">One decision or question you're facing right now <span style="font-weight:400;color:#5c5c60;">(optional, but it makes your report sharper)</span></label>
+        <textarea id="question" name="current_question" rows="3" placeholder="e.g. career change, a move, a big decision, a question about timing..."></textarea>
       </div>
 
       <!-- Hidden field: populated by JS below from the ?src= URL parameter, -->
